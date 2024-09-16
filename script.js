@@ -33,3 +33,22 @@ class View {
         });
     }
 }
+// Controlador: Coordina las interacciones entre el modelo y la vista
+class Controller {
+    constructor(model, view) {
+        this.model = model;
+        this.view = view;
+
+        // Cuando el usuario hace clic en enviar, actualizamos el modelo y la vista
+        this.view.bindSubmit(this.handleNameSubmit.bind(this));
+    }
+
+    // Método que gestiona la interacción cuando se ingresa un nombre
+    handleNameSubmit(name) {
+        this.model.setName(name);
+        this.view.updateDisplay(this.model.getName());
+    }
+}
+
+// Instanciamos el modelo, la vista y el controlador para que interactúen
+const app = new Controller(new Model(), new View());
